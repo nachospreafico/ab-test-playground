@@ -1,3 +1,42 @@
+from ab_testing.stats import ABTestResult
+
+# --- Concept texts for expanders --- #
+
+WHAT_IS_AB_TEST = """
+An A/B test compares **two versions** (A and B) of something,
+such as a screen, an email, or a button. Traffic is randomly
+split between A and B, and we measure a **metric** like
+conversion rate to see which performs better.
+"""
+
+CONTROL_VS_VARIANT = """
+- **Control (A):** the current or baseline version.
+- **Variant (B):** the new version with a change we want to test.
+
+We compare the metrics of A and B to decide whether to adopt
+the new version or keep the control.
+"""
+
+WHAT_IS_CONVERSION_RATE = """
+Conversion rate is defined as:
+
+> **conversion rate = conversions / users**
+
+If 100 users convert out of 1,000, the conversion rate is 10%.
+It's one of the most common metrics in A/B testing.
+"""
+
+WHAT_IS_PVALUE = """
+The **p-value** is the probability of observing a difference
+at least as large as the one we see if there is actually
+**no real effect** (no difference between A and B).
+
+We usually compare it to a **significance level** (alpha),
+often 0.05.
+- If p-value < alpha → we say the result is *statistically significant*.
+- If p-value ≥ alpha → the data is consistent with “no real effect”.
+"""
+
 def build_result_summary(result: ABTestResult) -> str:
     """
     Builds a human-readable summary of the A/B test result,

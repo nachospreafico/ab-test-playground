@@ -18,7 +18,7 @@ class ABTestResult:
     alpha: float
     is_significant: bool
 
-class InvalidABTestInput("Exception"):
+class InvalidABTestInput(Exception):
     """Raised when A/B test input values are invalid."""
     pass
 
