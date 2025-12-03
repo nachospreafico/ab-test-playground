@@ -48,7 +48,41 @@ with right_col:
         except InvalidABTestInput as e:
             st.error(str(e))
         else:
-            st.success(result)
+            st.subheader("Conversion Metrics")
+
+            cr_a_pct = result.cr_a * 100
+            cr_b_pct = result.cr_b * 100
+            lift_rel_pct = result.lift_rel * 100
+
+            cr_a_col, cr_b_col, lift_col = st.columns(3, border=True)
+            
+            with cr_a_col:
+                st.metric("CR(A)", f"{cr_a_pct:.1f}%")
+            
+            with cr_b_col:
+                st.metric("CR(B)", f"{cr_b_pct:.1f}%")
+            
+            with lift_col:
+                st.metric("Lift", f"{lift_rel_pct:+.1f}%")
+
+            st.subheader("Statistics Results")
+            z = result.z_score
+            p = result.p_value
+            is_significant = "Yes" if result.is_significant else "No"
+
+            z_col, p_col = st.columns(2, border=True)
+
+            with z_col:
+                st.metric("Z-score", f"{z:.3f}")
+            
+            with p_col:
+                st.metric("p-value", f"{p:.3f}")
+            
+            st.write(f"Significant at α = {result.alpha}: {is_significant}")
+
+            st.subheader("Summary")
+            summary = build_result_summary(result)
+            st.info(summary)
 
 
 st.markdown("---")
