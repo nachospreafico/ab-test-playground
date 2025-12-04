@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 from ab_testing.stats import run_ab_test, InvalidABTestInput
 from ab_testing.copydeck import (
@@ -68,6 +69,7 @@ with right_col:
             st.subheader("Statistics Results")
             z = result.z_score
             p = result.p_value
+            p_for_metric = "p < 0.001" if p < 0.001 else f"{p:.3f}"
             is_significant = "Yes" if result.is_significant else "No"
 
             z_col, p_col = st.columns(2, border=True)
@@ -76,7 +78,7 @@ with right_col:
                 st.metric("Z-score", f"{z:.3f}")
             
             with p_col:
-                st.metric("p-value", f"{p:.3f}")
+                st.metric("p-value", p_for_metric)
             
             st.write(f"Significant at α = {result.alpha}: {is_significant}")
 
@@ -84,6 +86,18 @@ with right_col:
             summary = build_result_summary(result)
             st.info(summary)
 
+            st.subheader("Conversion Rate Comparison")
+            conversion_rates = [cr_a_pct, cr_b_pct]
+            groups = ["A", "B"]
+
+            df = pd.DataFrame(
+                {
+                    "Group": groups,
+                    "CR (%)": conversion_rates
+                }
+            )
+
+            st.bar_chart(data=df, x="Group", y="CR (%)")
 
 st.markdown("---")
 
