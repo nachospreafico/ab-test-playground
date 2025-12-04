@@ -101,8 +101,8 @@ Suggested screenshots:
 1. Clone the repository:
 
 ```bash
-git clone <your_repo_url>
-cd <your_repo_name>
+git clone <https://github.com/nachospreafico/ab-test-playground>
+cd <ab-test-playground>
 ```
 
 2. Install dependencies:
