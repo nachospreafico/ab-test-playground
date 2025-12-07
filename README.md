@@ -165,12 +165,6 @@ Data & Business Analyst | Driving Decisions with Python, SQL & Power BI | Statis
 
 ---
 
-## 🏷️ License
-
-MIT License (optional — add only if you want).
-
----
-
 ## ⭐ Support / Feedback
 
 If you like this project, consider leaving a ⭐ on GitHub!  
